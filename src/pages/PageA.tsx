@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, View, Text, StyleSheet, Platform, RefreshControl } from "react-native";
-import Animated, { runOnJS, useAnimatedScrollHandler, useSharedValue, ZoomIn, ZoomOut } from "react-native-reanimated";
+import { Button, View, Text, StyleSheet, RefreshControl } from "react-native";
+import Animated, { ZoomIn, ZoomOut } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/core";
 
 function PageA() {
@@ -10,24 +10,6 @@ function PageA() {
 
   // States
   const [isLoading, setIsLoading] = useState(false);
-  const [scrollBounce, setScrollBounce] = useState(false);
-
-  // Animations
-  const scrollTop = useSharedValue(0);
-
-  const handleScroll = useAnimatedScrollHandler({
-    onScroll: ({ contentOffset }) => {
-      'worklet';
-
-      scrollTop.value = contentOffset.y;
-
-      const shouldBounce = contentOffset.y <= 100;
-
-      if (scrollBounce !== shouldBounce && Platform.OS === 'ios') {
-        runOnJS(setScrollBounce)(shouldBounce);
-      }
-    },
-  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,8 +25,6 @@ function PageA() {
           )}
           style={[{ flex: 1, width: '100%' }]}
           contentContainerStyle={[{ alignItems: 'center', justifyContent: 'center', width: '100%' }]}
-          onScroll={handleScroll}
-          nestedScrollEnabled
         >
           <Animated.View
             key={`zoom-2`}
