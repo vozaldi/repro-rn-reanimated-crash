@@ -13,6 +13,13 @@ function Home() {
           title='Go to Page A'
           onPress={() => navigation.navigate('PageA')}
         />
+
+        <View style={{ marginTop: 16 }} />
+
+        <Button
+          title='Go to Page B'
+          onPress={() => navigation.navigate('PageB')}
+        />
       </View>
     </SafeAreaView>
   )
