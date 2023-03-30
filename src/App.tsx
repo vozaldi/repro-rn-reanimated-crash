@@ -1,43 +1,22 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import Home from './pages/Home';
+import PageA from './pages/PageA';
 
-import Animated, { ZoomIn, ZoomOut } from 'react-native-reanimated';
+const Stack = createStackNavigator<any>();
 
 function App(): JSX.Element {
-  const [open, setOpen] = useState(false);
-
   return (
-    <SafeAreaView>
-      <View style={styles.sectionContainer}>
-        <Button
-          title='Toggle Animate'
-          onPress={() => setOpen(state => !state)}
-        />
-
-        {!open ? null : (
-          <Animated.View
-            entering={ZoomIn}
-            exiting={ZoomOut}
-          >
-            <Text>Suck</Text>
-          </Animated.View>
-        )}
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator
+          initialRouteName="Home"
+        >
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="PageA" component={PageA} />
+        </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-});
 
 export default App;
