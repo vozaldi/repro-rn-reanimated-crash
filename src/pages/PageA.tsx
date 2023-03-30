@@ -15,7 +15,11 @@ function PageA() {
       <Animated.ScrollView
         // Comment this props `refreshControl` to prevent crashing on `navigate.goBack()`
         refreshControl={(
-          <RefreshControl refreshing={isLoading} />
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={() => void(0)}
+            colors={['orange']}
+          />
         )}
         style={[{ flex: 1, width: '100%' }]}
         contentContainerStyle={[{ alignItems: 'center', justifyContent: 'center', width: '100%' }]}
